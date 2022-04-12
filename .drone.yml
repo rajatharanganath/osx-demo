@@ -6,8 +6,6 @@ pool:
   use: osx
 
 steps:
-- name: test
-  image: swift:4.2
+- name: run
   commands:
-  - swift build
-  - swift test
+  - swift osx-demo/main.swift
