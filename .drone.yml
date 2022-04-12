@@ -8,4 +8,5 @@ pool:
 steps:
 - name: run
   commands:
+  - echo "$PWD"
   - swift main.swift
