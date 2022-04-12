@@ -1,0 +1,13 @@
+kind: pipeline
+type: aws
+name: default
+
+pool:
+  use: osx
+
+steps:
+- name: test
+  image: swift:4.2
+  commands:
+  - swift build
+  - swift test
