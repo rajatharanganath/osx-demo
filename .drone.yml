@@ -8,4 +8,4 @@ pool:
 steps:
 - name: run
   commands:
-  - swift osx-demo/main.swift
+  - swift main.swift
