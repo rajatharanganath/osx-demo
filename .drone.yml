@@ -6,7 +6,7 @@ node:
   cluster: mac1
 
 pool:
-  use: osx
+  use: osx-anka
 
 steps:
 - name: run
