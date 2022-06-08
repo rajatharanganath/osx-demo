@@ -11,4 +11,4 @@ pool:
 steps:
 - name: run
   commands:
-  - swift osx-demo/osx-demo/main.swift
+  - cd HelloWorld; fastlane ios screenshots
