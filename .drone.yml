@@ -10,5 +10,5 @@ steps:
   commands:
   - export LC_ALL=en_US.UTF-8
   - export LANG=en_US.UTF-8
-  - fastlane snapshot update
+  - bundle exec fastlane snapshot update
   - fastlane ios screenshots
