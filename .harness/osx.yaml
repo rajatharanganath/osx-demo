@@ -1,0 +1,39 @@
+pipeline:
+  name: osx
+  identifier: osx
+  projectIdentifier: CI_Sanity
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: eoin
+        repoName: osx-demo
+        build: <+input>
+  stages:
+    - stage:
+        name: Run
+        identifier: Run
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: fastlane setp
+                  identifier: fastlane_setp
+                  spec:
+                    shell: Sh
+                    command: |-
+                      export LC_ALL=en_US.UTF-8
+                      export LANG=en_US.UTF-8
+                      sudo xcode-select -switch /Applications/Xcode_14.1.0.app
+                      fastlane build_mac_app --skip_codesigning
+          platform:
+            os: MacOS
+            arch: Arm64
+          runtime:
+            type: Cloud
+            spec: {}
