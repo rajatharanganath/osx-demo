@@ -10,5 +10,5 @@ steps:
   commands:
   - export LC_ALL=en_US.UTF-8
   - export LANG=en_US.UTF-8
-  - xcode select "/Applications/Xcode_14.0.1.app"
+  - sudo xcode-select -switch /Applications/Xcode_14.1.0.app
   - fastlane build_mac_app
