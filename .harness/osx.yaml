@@ -34,6 +34,7 @@ pipeline:
                       FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=<+secrets.getValue('fastlaneapppassword')>
                       sudo xcode-select -switch /Applications/Xcode_14.1.0.app
                       cd hello-harness
+                      fastlane sigh
                       fastlane beta
           platform:
             os: MacOS
