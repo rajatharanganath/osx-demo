@@ -29,6 +29,9 @@ pipeline:
                     command: |-
                       export LC_ALL=en_US.UTF-8
                       export LANG=en_US.UTF-8
+                      export FASTLANE_USER=eoin_mcafee@hotmail.co.uk
+                      export FASTLANE_PASSWORD=<+secrets.getValue('fastlanepassword')>
+                      FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=<+secrets.getValue('fastlaneapppassword')>
                       sudo xcode-select -switch /Applications/Xcode_14.1.0.app
                       fastlane beta
           platform:
