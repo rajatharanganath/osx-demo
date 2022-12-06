@@ -33,6 +33,7 @@ pipeline:
                       export FASTLANE_PASSWORD=<+secrets.getValue('fastlanepassword')>
                       FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=<+secrets.getValue('fastlaneapppassword')>
                       sudo xcode-select -switch /Applications/Xcode_14.1.0.app
+                      cd hello-harness
                       fastlane beta
           platform:
             os: MacOS
