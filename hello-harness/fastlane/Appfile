@@ -1,0 +1,8 @@
+app_identifier("osx.hello-harness") # The bundle identifier of your app
+apple_id("eoin_mcafee@hotmail.co.uk") # Your Apple Developer Portal username
+
+itc_team_id("125801674") # App Store Connect Team ID
+team_id("WF6U2K59T9") # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile

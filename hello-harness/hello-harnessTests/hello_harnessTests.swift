@@ -1,14 +1,14 @@
 //
-//  HelloWorldTests.swift
-//  HelloWorldTests
+//  hello_harnessTests.swift
+//  hello-harnessTests
 //
-//  Created by Eoin McAfee on 07/06/2022.
+//  Created by Eoin McAfee on 30/11/2022.
 //
 
 import XCTest
-@testable import HelloWorld
+@testable import hello_harness
 
-class HelloWorldTests: XCTestCase {
+final class hello_harnessTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

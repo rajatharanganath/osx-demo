@@ -16,8 +16,10 @@
 default_platform(:ios)
 
 platform :ios do
-  desc "Generate new localized screenshots"
-  lane :screenshots do
-    capture_screenshots(scheme: "HelloWorld")
+  desc "Push a new beta build to TestFlight"
+  lane :beta do
+    increment_build_number(xcodeproj: "hello-harness.xcodeproj")
+    build_app(scheme: "hello-harness", xcargs: "-allowProvisioningUpdates")
+    upload_to_testflight
   end
 end

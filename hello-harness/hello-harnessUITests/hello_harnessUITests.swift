@@ -1,13 +1,13 @@
 //
-//  HelloWorldUITests.swift
-//  HelloWorldUITests
+//  hello_harnessUITests.swift
+//  hello-harnessUITests
 //
-//  Created by Eoin McAfee on 07/06/2022.
+//  Created by Eoin McAfee on 30/11/2022.
 //
 
 import XCTest
 
-class HelloWorldUITests: XCTestCase {
+final class hello_harnessUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

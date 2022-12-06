@@ -1,13 +1,13 @@
 //
-//  HelloWorldUITestsLaunchTests.swift
-//  HelloWorldUITests
+//  hello_harnessUITestsLaunchTests.swift
+//  hello-harnessUITests
 //
-//  Created by Eoin McAfee on 07/06/2022.
+//  Created by Eoin McAfee on 30/11/2022.
 //
 
 import XCTest
 
-class HelloWorldUITestsLaunchTests: XCTestCase {
+final class hello_harnessUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
