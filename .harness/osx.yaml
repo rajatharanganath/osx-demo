@@ -42,7 +42,7 @@ pipeline:
                       PP_PATH=/tmp/build_pp.mobileprovision
                       KEYCHAIN_PATH=/tmp/app-signing.keychain-db
 
-                      echo -n "$BUILD_CERTIFICATE_BASE64" >> ce
+                      echo "$BUILD_CERTIFICATE_BASE64" >> ce
                       cat ce
                       # base64 -i ce --decode > $CERTIFICATE_PATH
 
