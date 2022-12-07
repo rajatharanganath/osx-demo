@@ -41,9 +41,7 @@ pipeline:
                       PP_PATH=/tmp/build_pp.mobileprovision
                       KEYCHAIN_PATH=/tmp/app-signing.keychain-db
 
-                      echo <+secrets.getValue('BUILD_CERTIFICATE_BASE64')> | base64 -di
-
-                      echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode > $CERTIFICATE_PATH
+                      base64 -i echo <+secrets.getValue('BUILD_CERTIFICATE_BASE64')> --decode > $CERTIFICATE_PATH
                       echo $CERTIFICATE_PATHe
           platform:
             os: MacOS
