@@ -22,11 +22,11 @@ pipeline:
             steps:
               - step:
                   type: Run
-                  name: fastlane setup
-                  identifier: fastlane_setp
+                  name: Run
+                  identifier: Run
                   spec:
                     shell: Sh
-                    command: |
+                    command: |-
                       export LC_ALL=en_US.UTF-8
                       export LANG=en_US.UTF-8
                       export FASTLANE_USER=eoin_mcafee@hotmail.co.uk
@@ -40,8 +40,11 @@ pipeline:
                       CERTIFICATE_PATH=/tmp/build_certificate.p12
                       PP_PATH=/tmp/build_pp.mobileprovision
                       KEYCHAIN_PATH=/tmp/app-signing.keychain-db
+
+                      echo <+secrets.getValue('BUILD_CERTIFICATE_BASE64')> | base64 -di
+
                       echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode > $CERTIFICATE_PATH
-                      echo $CERTIFICATE_PATH
+                      echo $CERTIFICATE_PATHe
           platform:
             os: MacOS
             arch: Arm64
