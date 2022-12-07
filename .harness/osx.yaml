@@ -33,27 +33,18 @@ pipeline:
                       export FASTLANE_PASSWORD=<+secrets.getValue('fastlanepassword')>
                       export BUILD_CERTIFICATE_BASE64=<+secrets.getValue('BUILD_CERTIFICATE_BASE64')>
                       export P12_PASSWORD=<+secrets.getValue('certpassword')>
-                      export KEYCHAIN_PASSWORD=admin
-                      export BUILD_PROVISION_PROFILE_BASE64=<+secrets.getValue('BUILD_PROVISION_PROFILE_BASE64')>
                       FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=<+secrets.getValue('fastlaneapppassword')>
                       sudo xcode-select -switch /Applications/Xcode_14.1.0.app
                       cd hello-harness
 
-                      CERTIFICATE_PATH=/tmp/build_certificate.p12
-                      PP_PATH=/tmp/build_pp.mobileprovision
-                      KEYCHAIN_PATH=/tmp/app-signing.keychain-db
-
-                      echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode > $CERTIFICATE_PATH
-
-                      security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-                      security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
-                      security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-
-                      security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
-                      security list-keychain -d user -s $KEYCHAIN_PATH
-
-                      mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-                      cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+                      echo $BUILD_CERTIFICATE_BASE64 | base64 —decode > certificate.p12
+                      security create-keychain -p P12_PASSWORD build.keychain
+                      security default-keychain -s build.keychain
+                      security unlock-keychain -p P12_PASSWORD build.keychain
+                      security import certificate.p12 -k build.keychain -P $BUILD_CERTIFICATE_BASE64 -T /usr/bin/codesign
+                      security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k P12_PASSWORD build.keychain
+                      export IDENTITY_ID=security find-identity -v
+                      /usr/bin/codesign --force -s IDENTITY_ID . -v
 
                       fastlane sigh
                       fastlane beta
