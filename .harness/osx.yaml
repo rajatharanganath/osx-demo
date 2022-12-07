@@ -44,19 +44,19 @@ pipeline:
 
                       echo "$BUILD_CERTIFICATE_BASE64" >> ce
                       cat ce
-                      # base64 -i ce --decode > $CERTIFICATE_PATH
+                      base64 -i ce --decode > $CERTIFICATE_PATH
 
-                      # security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-                      # security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
-                      # security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+                      security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+                      security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+                      security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
 
-                      # security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
-                      # security list-keychain -d user -s $KEYCHAIN_PATH
-                      # mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-                      # cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+                      security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+                      security list-keychain -d user -s $KEYCHAIN_PATH
+                      mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+                      cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
 
-                      # fastlane sigh
-                      # fastlane beta
+                      fastlane sigh
+                      fastlane beta
           platform:
             os: MacOS
             arch: Arm64
