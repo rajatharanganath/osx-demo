@@ -58,6 +58,7 @@ pipeline:
                       # mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
                       # cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
                        
+                      fastlane match init
                       fastlane sigh
                       fastlane beta
           platform:
