@@ -26,7 +26,7 @@ pipeline:
                   identifier: fastlane_setp
                   spec:
                     shell: Sh
-                    command: |-
+                    command: |
                       export LC_ALL=en_US.UTF-8
                       export LANG=en_US.UTF-8
                       export FASTLANE_USER=eoin_mcafee@hotmail.co.uk
@@ -37,17 +37,11 @@ pipeline:
                       sudo xcode-select -switch /Applications/Xcode_14.1.0.app
                       cd hello-harness
 
-                      echo $BUILD_CERTIFICATE_BASE64 | base64 —decode > certificate.p12
-                      security create-keychain -p P12_PASSWORD build.keychain
-                      security default-keychain -s build.keychain
-                      security unlock-keychain -p P12_PASSWORD build.keychain
-                      security import certificate.p12 -k build.keychain -P $BUILD_CERTIFICATE_BASE64 -T /usr/bin/codesign
-                      security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k P12_PASSWORD build.keychain
-                      export IDENTITY_ID=security find-identity -v
-                      /usr/bin/codesign --force -s IDENTITY_ID . -v
-
-                      fastlane sigh
-                      fastlane beta
+                      CERTIFICATE_PATH=/tmp/build_certificate.p12
+                      PP_PATH=/tmp/build_pp.mobileprovision
+                      KEYCHAIN_PATH=/tmp/app-signing.keychain-db
+                      echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode > $CERTIFICATE_PATH
+                      echo $CERTIFICATE_PATH
           platform:
             os: MacOS
             arch: Arm64
