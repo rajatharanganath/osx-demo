@@ -35,7 +35,7 @@ pipeline:
                       export BUILD_PROVISION_PROFILE_BASE64=<+secrets.getValue('BUILD_PROVISION_PROFILE_BASE64')>
                       export P12_PASSWORD=<+secrets.getValue('certpassword')>
                       export KEYCHAIN_PASSWORD=admin
-                      FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=<+secrets.getValue('fastlaneapppassword')>
+                      export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=<+secrets.getValue('fastlaneapppassword')>
                       sudo xcode-select -switch /Applications/Xcode_14.1.0.app
                       cd hello-harness
 
@@ -58,6 +58,7 @@ pipeline:
                       mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
                       cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
                        
+                      fastlane sigh
                       fastlane beta
           platform:
             os: MacOS
