@@ -46,8 +46,8 @@ pipeline:
                       echo "$BUILD_CERTIFICATE_BASE64" >> ce
                       base64 -i ce --decode > $CERTIFICATE_PATH
 
-                      echo "$BUILD_PROVISION_PROFILE_BASE64" >> prof
-                      base64 -i prof --decode > $PP_PATH
+                      # echo "$BUILD_PROVISION_PROFILE_BASE64" >> prof
+                      # base64 -i prof --decode > $PP_PATH
 
                       security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
                       security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
@@ -55,8 +55,8 @@ pipeline:
 
                       security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
                       security list-keychain -d user -s $KEYCHAIN_PATH
-                      mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-                      cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+                      # mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+                      # cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
                        
                       fastlane sigh
                       fastlane beta
