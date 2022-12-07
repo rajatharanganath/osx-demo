@@ -43,7 +43,7 @@ pipeline:
                       PP_PATH=/tmp/build_pp.mobileprovision
                       KEYCHAIN_PATH=/tmp/app-signing.keychain-db
 
-                      echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode --output $CERTIFICATE_PATH
+                      echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode > $CERTIFICATE_PATH
 
                       security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
                       security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
