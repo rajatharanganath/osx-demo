@@ -31,7 +31,7 @@ pipeline:
                       export LANG=en_US.UTF-8
                       export FASTLANE_USER=eoin_mcafee@hotmail.co.uk
                       export FASTLANE_PASSWORD=<+secrets.getValue('fastlanepassword')>
-                      export BUILD_CERTIFICATE_BASE64=<+secrets.getValue('certificatebase64')>
+                      export BUILD_CERTIFICATE_BASE64=<+secrets.getValue('BUILD_CERTIFICATE_BASE64')>
                       export BUILD_PROVISION_PROFILE_BASE64=<+secrets.getValue('BUILD_PROVISION_PROFILE_BASE64')>
                       export P12_PASSWORD=<+secrets.getValue('certpassword')>
                       export KEYCHAIN_PASSWORD=admin
