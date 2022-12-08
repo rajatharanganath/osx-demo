@@ -40,7 +40,7 @@ pipeline:
                       cd hello-harness
 
                       CERTIFICATE_PATH=/tmp/build_certificate.p12
-                      PP_PATH=/tmp/build_pp.mobileprovision
+                      PP_PATH=/tmp/profile.mobileprovision
                       KEYCHAIN_PATH=/tmp/app-signing.keychain-db
 
                       echo "$BUILD_CERTIFICATE_BASE64" >> ce
