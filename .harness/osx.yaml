@@ -14,7 +14,6 @@ pipeline:
     - stage:
         name: Run
         identifier: Run
-        description: ""
         type: CI
         spec:
           cloneCodebase: true
@@ -65,3 +64,5 @@ pipeline:
           runtime:
             type: Cloud
             spec: {}
+  delegateSelectors:
+    - dlite-test-prod-vm
