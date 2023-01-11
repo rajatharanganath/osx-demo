@@ -58,12 +58,11 @@ pipeline:
                       cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
 
                       fastlane beta
-          infrastructure:
-            type: VM
-            spec:
-              type: Pool
-              spec:
-                poolName: osx-anka
-                os: MacOS
+          platform:
+            os: MacOS
+            arch: Arm64
+          runtime:
+            type: Cloud
+            spec: {}
   delegateSelectors:
     - dlite-test-prod-vm
