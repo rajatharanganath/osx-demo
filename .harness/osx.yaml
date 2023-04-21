@@ -1,0 +1,68 @@
+pipeline:
+  name: osx
+  identifier: osx
+  projectIdentifier: CI_Sanity
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: eoin
+        repoName: osx-demo
+        build: <+input>
+  stages:
+    - stage:
+        name: Run
+        identifier: Run
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Run
+                  identifier: Run
+                  spec:
+                    shell: Sh
+                    command: |-
+                      export LC_ALL=en_US.UTF-8
+                      export LANG=en_US.UTF-8
+                      export FASTLANE_USER=eoin_mcafee@hotmail.co.uk
+                      export FASTLANE_PASSWORD=<+secrets.getValue('fastlanepassword')>
+                      export BUILD_CERTIFICATE_BASE64=<+secrets.getValue('BUILD_CERTIFICATE_BASE64')>
+                      export BUILD_PROVISION_PROFILE_BASE64=<+secrets.getValue('BUILD_PROVISION_PROFILE_BASE64')>
+                      export P12_PASSWORD=<+secrets.getValue('certpassword')>
+                      export KEYCHAIN_PASSWORD=admin
+                      export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=<+secrets.getValue('fastlaneapppassword')>
+                      sudo xcode-select -switch /Applications/Xcode_14.1.0.app
+                      cd hello-harness
+
+                      CERTIFICATE_PATH=/tmp/build_certificate.p12
+                      PP_PATH=/tmp/profile.mobileprovision
+                      KEYCHAIN_PATH=/tmp/app-signing.keychain-db
+
+                      echo "$BUILD_CERTIFICATE_BASE64" >> ce
+                      base64 -i ce --decode > $CERTIFICATE_PATH
+
+                      echo "$BUILD_PROVISION_PROFILE_BASE64" >> prof
+                      base64 -i prof --decode > $PP_PATH
+
+                      security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+                      security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+                      security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+
+                      security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+                      security list-keychain -d user -s $KEYCHAIN_PATH
+                      mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+                      cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+
+                      fastlane beta
+          platform:
+            os: MacOS
+            arch: Arm64
+          runtime:
+            type: Cloud
+            spec: {}
+  delegateSelectors:
+    - dlite-test-prod-vm
